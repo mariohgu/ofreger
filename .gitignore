@@ -1,4 +1,5 @@
 /venv
 /log
 *.bin
+api_key.txt
 /__pycache__
