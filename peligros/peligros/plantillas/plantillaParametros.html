@@ -1,12 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plantilla que recibe parametros</title>
+    <style>
+        li{
+            color:red
+        }
+    </style>
 </head>
 <body>
     <h1>Nombre del canal es: {{nombreUsuario}}</h1>
-    <h2>Fecha actual: Dia: {{fechaActual.day}}, Mes: {{fechaActual.month}}, Ano: {{fechaActual.year}}, Hora: {{fechaActual.hour}}</h2>
+    <h2>Fecha actual: Dia: {{fechaActual.day}}, Mes: {{fechaActual.month}}, Año: {{fechaActual.year}}, Hora: {{fechaActual.hour}}</h2>
+    <h3>Lenguajes de programacion: {{lenguajes|length}}</h3>
+    <ul>
+        {% for lenguaje in lenguajes %}
+            {% if lenguaje == 'Python' %}
+                <li style="color:blue">{{lenguaje}}</li>
+            {% else %}
+                <li >{{lenguaje|first}} : {{lenguaje|lower}}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
 </body>
 </html>

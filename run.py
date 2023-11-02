@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from app.models.usuario import db
 from app.views.usuario_views import usuario_bp
@@ -14,6 +14,10 @@ db.init_app(app)
 
 # Registrar el Blueprint
 app.register_blueprint(usuario_bp)
+
+# @usuario_bp.route('/usuario')
+# def usuario():
+#     return render_template('usuarios/usuario.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

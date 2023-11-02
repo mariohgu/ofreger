@@ -19,12 +19,13 @@ from django.urls import path
 from peligros import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('bienvenida/', views.bienvenida),
-    path('bienvenida123/', views.bienvenidaRojo),
-    path('edad/<int:edad>/', views.categoriaEdad),
-    path('fecha/', views.obtenermomentoactual),
-    path('contenido/<str:nombre>/<int:edad>/', views.contenidoHTML),
-    path('miprimeraplantilla/', views.miPrimeraPlantilla),
-    path('plantillaparametros/', views.plantillaParametros),
+    path("admin/", admin.site.urls),
+    path("bienvenida/", views.bienvenida),
+    path("bienvenida123/", views.bienvenidaRojo),
+    path("edad/<int:edad>/", views.categoriaEdad),
+    path("fecha/", views.obtenermomentoactual),
+    path("contenido/<str:nombre>/<int:edad>/", views.contenidoHTML),
+    path("miprimeraplantilla/", views.miPrimeraPlantilla),
+    path("plantillaparametros/", views.plantillaParametros),
+    path("plantillacargador/", views.plantillaCargador),
 ]
