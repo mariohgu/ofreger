@@ -100,3 +100,11 @@ def plantillaShortcut(request):
         "lenguajes": lenguaje,
     }
     return render(request, "plantillaParametros.html", enviodata)
+
+
+def plantillaHija1(request):
+    return render(request, "plantillaHija1.html", {})
+
+
+def plantillaHija2(request):
+    return render(request, "plantillaHija2.html", {})
