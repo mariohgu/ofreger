@@ -3,6 +3,7 @@ import datetime
 from django.template import Template, Context
 import os
 from django.template.loader import get_template
+from django.shortcuts import render
 
 ruta = os.path.dirname(os.path.abspath(__file__))
 # Request: Realizar peticiones al servidor
@@ -87,3 +88,15 @@ def plantillaCargador(request):
         {"nombreUsuario": nombre, "fechaActual": fechaActual, "lenguajes": lenguaje}
     )
     return HttpResponse(documento)
+
+
+def plantillaShortcut(request):
+    nombre = "Mario"
+    lenguaje = ["Python", "Java", "C++", "Kotlin", "C#", "JavaScript", "PHP"]
+    fechaActual = datetime.datetime.now()
+    enviodata = {
+        "nombreUsuario": nombre,
+        "fechaActual": fechaActual,
+        "lenguajes": lenguaje,
+    }
+    return render(request, "plantillaParametros.html", enviodata)

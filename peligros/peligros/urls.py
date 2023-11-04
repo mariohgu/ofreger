@@ -28,4 +28,5 @@ urlpatterns = [
     path("miprimeraplantilla/", views.miPrimeraPlantilla),
     path("plantillaparametros/", views.plantillaParametros),
     path("plantillacargador/", views.plantillaCargador),
+    path("plantillaShortcut/", views.plantillaShortcut),
 ]
