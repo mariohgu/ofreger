@@ -1,5 +1,5 @@
 from typing import Any
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView
 from .models import Curso
 
@@ -31,3 +31,34 @@ class CursoListView(ListView):
         context = super().get_context_data(**kwargs)
         context["Titulo"] = "Listado de Cursos"
         return context
+
+
+def registrarCurso(request):
+    nombre = request.POST["txtNombre"]
+    creditos = request.POST["numCreditos"]
+    registro = Curso.objects.create(nombre=nombre, creditos=creditos)
+
+    return redirect("/")
+
+
+def eliminarCurso(request, id):
+    item = Curso.objects.get(id=id)
+    item.delete()
+    return redirect("/")
+
+
+def editarCurso(request, id):
+    curso = Curso.objects.get(id=id)
+    data = {"Titulo": "Edicion de Curso", "curso": curso}
+    return render(request, "editarCurso.html", data)
+
+
+def editandoCurso(request):
+    id = int(request.POST["id"])
+    nombre = request.POST["txtNombre"]
+    creditos = request.POST["numCreditos"]
+    item = Curso.objects.get(id=id)
+    item.nombre = nombre
+    item.creditos = creditos
+    item.save()
+    return redirect("/")
