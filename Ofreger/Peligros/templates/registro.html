@@ -40,43 +40,44 @@
                     <h2>Gestión de Peligros</h2>
                     <div class="card">
                         <div class="card-body">
-                            <form id="formularioCurso" action="/registro/" method="POST">
+                            <form id="formularioCurso" action="/validarPdf/" method="POST">
                                 {% csrf_token %}
+                                <input type="hidden" name="id" id="id" value="{{id}}">
                                 <div class="form-group">
-                                    <input type="number" id="txtsinpad" name="txtsinpad" class="form-control" min="1" value="1" required />
+                                    <input type="number" id="txtsinpad" name="txtsinpad" class="form-control" min="1" value="{{sinpad}}" required />
                                 </div>
                                 <br/> 
                                 <div class="form-group">
-                                    <input type="text" id="txtprovincia" name="txtprovincia" class="form-control" minlength="3" maxlength="40" placeholder="Provincia" autofocus required />
+                                    <input type="text" id="txtprovincia" name="txtprovincia" class="form-control" minlength="3" maxlength="40" placeholder="Provincia" value="{{provincia}}" autofocus required />
                                 </div>
                                 <br/>
                                 <div class="form-group">
-                                    <input type="text" id="txtdistrito" name="txtdistrito" class="form-control" minlength="3" maxlength="40" placeholder="Distrtito" autofocus required />
+                                    <input type="text" id="txtdistrito" name="txtdistrito" class="form-control" minlength="3" maxlength="40" placeholder="Distrtito" value="{{distrito}}" autofocus required />
                                 </div>
                                 <br/>
                                 <div class="form-group">
-                                    <input type="text" id="txtlocalidad" name="txtlocalidad" class="form-control" minlength="3" maxlength="40" placeholder="Localidad" autofocus required />
+                                    <input type="text" id="txtlocalidad" name="txtlocalidad" class="form-control" minlength="3" maxlength="40" placeholder="Localidad" value="{{localidad}}" autofocus required />
                                 </div>
                                 <br/>
                                 <div class="form-group">
-                                    <input type="number" id="txtubigeo" name="txtubigeo" class="form-control" min="1" value="1" required />
+                                    <input type="number" id="txtubigeo" name="txtubigeo" class="form-control" min="1" value="{{ubigeo}}" required />
                                 </div>
                                 <br/>
                                 <div class="form-group">
-                                    <input type="text" id="txtlatitud" name="txtlatitud" class="form-control" minlength="3" maxlength="40" placeholder="Latitud" autofocus required />
+                                    <input type="text" id="txtlatitud" name="txtlatitud" class="form-control" value="{{latitud}}" minlength="3" maxlength="40" placeholder="Latitud" autofocus required />
                                 </div>
                                 <br/>
                                 <div class="form-group">
-                                    <input type="text" id="txtlongitud" name="txtlongitud" class="form-control" minlength="3" maxlength="40" placeholder="Longitud" autofocus required />
+                                    <input type="text" id="txtlongitud" name="txtlongitud" class="form-control" value="{{longitud}}" minlength="3" maxlength="40" placeholder="Longitud" autofocus required />
                                 </div>
                                 <br/>
                                 <div class="form-group">
-                                    <textarea class="w-100" id="txtdescripcion" name ="txtdescripcion" rows="4" placeholder="Descripcion" required autofocus></textarea>
+                                    <textarea class="w-100" id="txtdescripcion" name ="txtdescripcion" rows="4" placeholder="Descripcion" required autofocus>{{descripcion}}</textarea>
                                    
                                 </div>
                                 <br/>
                                 <div class="form-group">
-                                    <input type="text" id="url_pdf" name="url_pdf" class="form-control" minlength="3" maxlength="199" placeholder="PDF" autofocus required />
+                                    <input type="text" id="url_pdf" name="url_pdf" class="form-control" minlength="3" maxlength="199" placeholder="PDF" value="{{pdf_url}}" autofocus required disabled/>
                                 </div>
                                 <br/>
                                 <div class="form-group">

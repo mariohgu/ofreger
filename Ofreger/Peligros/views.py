@@ -72,7 +72,7 @@ def cargarPdf(request):
             items = process_pdf(pdf_file)
 
             # Crea una nueva instancia del modelo Peligro y asigna los valores
-            nuevo_peligro = Peligro(
+            nuevo_peligro = Peligro.objects.create(
                 sinpad=sinpad,
                 provincia=items[0],
                 distrito=items[1],
@@ -91,7 +91,10 @@ def cargarPdf(request):
             # Obtén la URL del archivo PDF
             pdf_url = nuevo_peligro.url_pdf.url
 
+            id_nuevo = nuevo_peligro.id
+
             # Asigna los valores extraídos a las variables correspondientes
+            id = id_nuevo
             provincia = items[0]
             distrito = items[1]
             localidad = items[2]
@@ -102,6 +105,7 @@ def cargarPdf(request):
 
     # Prepara el diccionario de datos para enviar al template
     data = {
+        "id": id,
         "sinpad": sinpad,
         "provincia": provincia,
         "distrito": distrito,
@@ -115,3 +119,30 @@ def cargarPdf(request):
 
     # Si no es una solicitud POST, simplemente muestra el formulario
     return render(request, "registro.html", data)
+
+
+def validarPdf(request):
+    id = request.POST["id"]
+    sinpad = request.POST["txtsinpad"]
+    provincia = request.POST["txtprovincia"]
+    distrito = request.POST["txtdistrito"]
+    localidad = request.POST["txtlocalidad"]
+    ubigeo = request.POST["txtubigeo"]
+    latitud = request.POST["txtlatitud"]
+    longitud = request.POST["txtlongitud"]
+    descripcion = request.POST["txtdescripcion"]
+    url_pdf = request.POST["url_pdf"]
+
+    regis_peligro = Peligro.objects.get(id=id)
+    regis_peligro.sinpad = sinpad
+    regis_peligro.provincia = provincia
+    regis_peligro.distrito = distrito
+    regis_peligro.localidad = localidad
+    regis_peligro.ubigeo = ubigeo
+    regis_peligro.latitud = latitud
+    regis_peligro.longitud = longitud
+    regis_peligro.descripcion = descripcion
+    regis_peligro.url_pdf = url_pdf
+    regis_peligro.save()
+
+    return redirect("/")
