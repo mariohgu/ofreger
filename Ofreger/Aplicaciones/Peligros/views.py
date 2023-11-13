@@ -1,4 +1,5 @@
 from typing import Any
+import os
 from django.db.models.query import QuerySet
 from .models import Peligro
 from django.shortcuts import render, redirect
@@ -46,10 +47,6 @@ def registro(request):
     )
 
     return redirect("/")
-
-
-from django.shortcuts import render
-from .models import Peligro
 
 
 def cargarPdf(request):
@@ -114,7 +111,7 @@ def cargarPdf(request):
         "latitud": latitud,
         "longitud": longitud,
         "descripcion": descripcion,
-        "pdf_url": pdf_url,  # Esta será la URL para acceder al archivo PDF
+        "url_pdf": pdf_url,  # Esta será la URL para acceder al archivo PDF
     }
 
     # Si no es una solicitud POST, simplemente muestra el formulario
@@ -131,7 +128,6 @@ def validarPdf(request):
     latitud = request.POST["txtlatitud"]
     longitud = request.POST["txtlongitud"]
     descripcion = request.POST["txtdescripcion"]
-    url_pdf = request.POST["url_pdf"]
 
     regis_peligro = Peligro.objects.get(id=id)
     regis_peligro.sinpad = sinpad
@@ -142,7 +138,33 @@ def validarPdf(request):
     regis_peligro.latitud = latitud
     regis_peligro.longitud = longitud
     regis_peligro.descripcion = descripcion
-    regis_peligro.url_pdf = url_pdf
     regis_peligro.save()
 
+    return redirect("/")
+
+
+def editarPeligro(request, id):
+    peligro = Peligro.objects.get(id=id)
+    # data = {"Titulo": "Edicion de Curso", "curso": curso}
+    data = {
+        "id": peligro.id,
+        "sinpad": peligro.sinpad,
+        "provincia": peligro.provincia,
+        "distrito": peligro.distrito,
+        "localidad": peligro.localidad,
+        "ubigeo": peligro.ubigeo,
+        "latitud": peligro.latitud,
+        "longitud": peligro.longitud,
+        "descripcion": peligro.descripcion,
+        "url_pdf": peligro.url_pdf,
+    }
+    return render(request, "registro.html", data)
+
+
+def eliminarPeligro(request, id):
+    peligro = Peligro.objects.get(id=id)
+    pdf_path = peligro.url_pdf.path
+    if os.path.isfile(pdf_path):
+        os.remove(pdf_path)
+    peligro.delete()
     return redirect("/")

@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "Peligros",
+    "Aplicaciones.Peligros",
 ]
 
 MIDDLEWARE = [
@@ -55,7 +55,7 @@ ROOT_URLCONF = "Ofreger.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "Peligros" / "templates"],
+        "DIRS": [BASE_DIR / "Aplicaciones" / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -120,7 +120,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
-STATICFILES_DIRS = [BASE_DIR / "Peligros" / "static"]
+STATICFILES_DIRS = [BASE_DIR / "Aplicaciones" / "Peligros" / "static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -128,4 +128,4 @@ STATICFILES_DIRS = [BASE_DIR / "Peligros" / "static"]
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 MEDIA_URL = "media/"
-MEDIA_ROOT = str(BASE_DIR / "Peligros" / "media")
+MEDIA_ROOT = str(BASE_DIR / "Aplicaciones" / "Peligros" / "media")
