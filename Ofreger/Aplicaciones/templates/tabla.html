@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+<!--                                 <br/> -->
+{% block content %}
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+      <div class="table-responsive">
+        <table id="datatable-peligros" class="table">
+          <caption>
+            Ofreger
+          </caption>
+          <thead>
+            <tr>
+              <th class="centered">#</th>
+              <th class="centered">Sinpad</th>
+              <th class="centered">Distrito</th>
+              <th class="centered" width="40%">Descripcion</th>
+              <th class="centered">PDF</th>
+              <th class="centered">Opciones</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody_peligros"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} {%load static %}
+<!-- Bootstrap core JavaScript -->
+{% block js %}
+<script src="{% static 'js/tablas.js' %}"></script>
+{% endblock %}
+<!-- Bootstrap -->

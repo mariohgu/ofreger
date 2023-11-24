@@ -4,7 +4,6 @@ const $txtNombre = document.getElementById("txtNombre");
 const $numsinpad = document.getElementById("numsinpad");
 */
 
-const btnsEliminacion = document.querySelectorAll(".btnEliminacion");
 
 (function () {
     //notificacionSwal(document.title, "Cursos listados con éxito", "success", "Ok");
@@ -27,22 +26,7 @@ const btnsEliminacion = document.querySelectorAll(".btnEliminacion");
     });
     */
 
-    btnsEliminacion.forEach((btn) => {
-        btn.addEventListener("click", function (e) {
-            e.preventDefault();
-            Swal.fire({
-                title: "¿Confirma la eliminación del Peligro?",
-                showCancelButton: true,
-                confirmButtonText: "Eliminar",
-                confirmButtonColor: "#d33",
-                backdrop: true,
-                showLoaderOnConfirm: true,
-                preConfirm: () => {
-                    location.href = e.target.href;
-                },
-                allowOutsideClick: () => false,
-                allowEscapeKey: () => false,
-            });
-        });
-    });
+
+
+
 })();

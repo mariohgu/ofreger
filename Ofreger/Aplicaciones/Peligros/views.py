@@ -7,13 +7,14 @@ from django.views.generic import ListView
 from .script import *
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
+from django.http.response import JsonResponse
 
 # Create your views here.
 
 
 class PeligroListView(ListView):
     model = Peligro
-    template_name = "cargaPdf.html"
+    template_name = "tabla.html"
 
     def get_queryset(self) -> QuerySet[Any]:
         return Peligro.objects.all()
@@ -168,3 +169,17 @@ def eliminarPeligro(request, id):
         os.remove(pdf_path)
     peligro.delete()
     return redirect("/")
+
+
+def generacionTablas(request):
+    peligros = list(Peligro.objects.values())
+    data = {"peligros": peligros}
+    return JsonResponse(data)
+
+
+def tablas(request):
+    return render(request, "tabla.html")
+
+
+def nuevo(request):
+    return render(request, "cargaPdf.html")

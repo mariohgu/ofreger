@@ -1,99 +1,169 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{Titulo}}</title>
-    <link rel="short icon" href="{% static 'img/web.png' %}">
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/gestionVista.css' %}">
-    <!-- ESTILO DE FONT GOOGLE UBUNTU -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet">
-</head>
-<body>
-
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="/">Mario</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-              <a class="nav-link active" aria-current="page" href="/">Home</a>
-              <a class="nav-link" href="#">Peligro</a>
-              <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-            </div>
+{% extends 'base.html' %} {% block content %}
+<div class="container py-12">
+  <div class="row">
+    <div class="row">
+      <div class="col-md-12 offset-md-12">
+        <h2>Gestión de Peligros</h2>
+        <div class="card">
+          <div class="card-body">
+            <form id="formularioPeligro" action="/validarPdf/" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="id" id="id" value="{{id}}" />
+              <div class="form-group col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                <label for="txtsinpad">Sinpad:</label>
+                <input
+                  type="number"
+                  id="txtsinpad"
+                  name="txtsinpad"
+                  class="form-control"
+                  min="1"
+                  value="{{sinpad}}"
+                  required
+                />
+              </div>
+              <br />
+              <div class="form-group col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                <label for="txtprovincia">Provincia:</label>
+                <input
+                  type="text"
+                  id="txtprovincia"
+                  name="txtprovincia"
+                  class="form-control"
+                  minlength="3"
+                  maxlength="40"
+                  placeholder="Provincia"
+                  value="{{provincia}}"
+                  autofocus
+                  required
+                />
+              </div>
+              <br />
+              <div class="form-group">
+                <label for="txtdistrito">Distrito:</label>
+                <input
+                  type="text"
+                  id="txtdistrito"
+                  name="txtdistrito"
+                  class="form-control"
+                  minlength="3"
+                  maxlength="40"
+                  placeholder="Distrtito"
+                  value="{{distrito}}"
+                  autofocus
+                  required
+                />
+              </div>
+              <br />
+              <div class="form-group">
+                <label for="txtlocalidad">Localidad:</label>
+                <input
+                  type="text"
+                  id="txtlocalidad"
+                  name="txtlocalidad"
+                  class="form-control"
+                  minlength="3"
+                  maxlength="40"
+                  placeholder="Localidad"
+                  value="{{localidad}}"
+                  autofocus
+                  required
+                />
+              </div>
+              <br />
+              <div class="form-group">
+                <label for="txtubigeo">Ubigeo:</label>
+                <input
+                  type="number"
+                  id="txtubigeo"
+                  name="txtubigeo"
+                  class="form-control"
+                  min="1"
+                  value="{{ubigeo}}"
+                  required
+                />
+              </div>
+              <br />
+              <div class="form-group">
+                <label for="txtlatitud">Latitud:</label>
+                <input
+                  type="text"
+                  id="txtlatitud"
+                  name="txtlatitud"
+                  class="form-control"
+                  value="{{latitud}}"
+                  minlength="3"
+                  maxlength="40"
+                  placeholder="Latitud"
+                  autofocus
+                  required
+                />
+              </div>
+              <br />
+              <div class="form-group">
+                <label for="txtlongitud">Longitud:</label>
+                <input
+                  type="text"
+                  id="txtlongitud"
+                  name="txtlongitud"
+                  class="form-control"
+                  value="{{longitud}}"
+                  minlength="3"
+                  maxlength="40"
+                  placeholder="Longitud"
+                  autofocus
+                  required
+                />
+              </div>
+              <br />
+              <div class="form-group">
+                <label for="txtdescripcion">Descripcion:</label>
+                <textarea
+                  class="w-100"
+                  id="txtdescripcion"
+                  name="txtdescripcion"
+                  rows="4"
+                  placeholder="Descripcion"
+                  required
+                  autofocus
+                >
+{{descripcion}}</textarea
+                >
+              </div>
+              <br />
+              <div class="form-group">
+                <label for="url_pdf">PDF:</label>
+                <input
+                  type="text"
+                  id="url_pdf"
+                  name="url_pdf"
+                  class="form-control"
+                  minlength="3"
+                  maxlength="199"
+                  placeholder="PDF"
+                  value="{{url_pdf}}"
+                  autofocus
+                  required
+                  disabled
+                />
+              </div>
+              <br />
+              <div class="form-group">
+                <button type="submit" class="btn btn-success w-100 text-white">
+                  <i class="far fa-save"></i> Guardar
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger w-100 text-white"
+                  onclick="window.location.href='/tablas';"
+                >
+                  <i class="far fa-times-circle"></i> Cancelar
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-      </nav>
-
-
-    <div class="container py-4">
-        <div class="row">
-            <div class="row">
-                <div class="col-md-4 offset-md-4">
-                    <h2>Gestión de Peligros</h2>
-                    <div class="card">
-                        <div class="card-body">
-                            <form id="formularioPeligro" action="/validarPdf/" method="POST">
-                                {% csrf_token %}
-                                <input type="hidden" name="id" id="id" value="{{id}}">
-                                <div class="form-group">
-                                    <input type="number" id="txtsinpad" name="txtsinpad" class="form-control" min="1" value="{{sinpad}}" required />
-                                </div>
-                                <br/> 
-                                <div class="form-group">
-                                    <input type="text" id="txtprovincia" name="txtprovincia" class="form-control" minlength="3" maxlength="40" placeholder="Provincia" value="{{provincia}}" autofocus required />
-                                </div>
-                                <br/>
-                                <div class="form-group">
-                                    <input type="text" id="txtdistrito" name="txtdistrito" class="form-control" minlength="3" maxlength="40" placeholder="Distrtito" value="{{distrito}}" autofocus required />
-                                </div>
-                                <br/>
-                                <div class="form-group">
-                                    <input type="text" id="txtlocalidad" name="txtlocalidad" class="form-control" minlength="3" maxlength="40" placeholder="Localidad" value="{{localidad}}" autofocus required />
-                                </div>
-                                <br/>
-                                <div class="form-group">
-                                    <input type="number" id="txtubigeo" name="txtubigeo" class="form-control" min="1" value="{{ubigeo}}" required />
-                                </div>
-                                <br/>
-                                <div class="form-group">
-                                    <input type="text" id="txtlatitud" name="txtlatitud" class="form-control" value="{{latitud}}" minlength="3" maxlength="40" placeholder="Latitud" autofocus required />
-                                </div>
-                                <br/>
-                                <div class="form-group">
-                                    <input type="text" id="txtlongitud" name="txtlongitud" class="form-control" value="{{longitud}}" minlength="3" maxlength="40" placeholder="Longitud" autofocus required />
-                                </div>
-                                <br/>
-                                <div class="form-group">
-                                    <textarea class="w-100" id="txtdescripcion" name ="txtdescripcion" rows="4" placeholder="Descripcion" required autofocus>{{descripcion}}</textarea>
-                                   
-                                </div>
-                                <br/>
-                                <div class="form-group">
-                                    <input type="text" id="url_pdf" name="url_pdf" class="form-control" minlength="3" maxlength="199" placeholder="PDF" value="{{url_pdf}}" autofocus required disabled/>
-                                </div>
-                                <br/>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-success w-100 text-white"><i class="far fa-save"></i> Guardar</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            
-        </div>
+      </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- <script src = {% static 'js/utils/notificaciones.js' %}></script>
-    <script src="{% static 'js/gestionCursos.js' %}"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    
-</body>
-</html>
+  </div>
+</div>
+{% endblock %}

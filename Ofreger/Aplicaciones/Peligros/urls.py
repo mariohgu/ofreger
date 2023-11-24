@@ -8,4 +8,7 @@ urlpatterns = [
     path("validarPdf/", views.validarPdf),
     path("eliminarPeligro/<int:id>", views.eliminarPeligro),
     path("editarPeligro/<int:id>", views.editarPeligro),
+    path("generacionTablas/", views.generacionTablas),
+    path("tablas/", views.tablas),
+    path("nuevo/", views.nuevo),
 ]
