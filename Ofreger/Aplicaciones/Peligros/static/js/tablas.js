@@ -9,7 +9,10 @@ const dataTableOptions = {
         { searchable: false, targets: [0, 2] }
     ],
     pageLength: 4,
-    destroy: true
+    destroy: true,
+    language: {
+        url: "//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"
+    }
 };
 
 const initDataTable = async () => {
@@ -36,7 +39,7 @@ const listPeligros = async () => {
                     <td>${index + 1}</td>
                     <td>${escapeHtml(peligros.sinpad)}</td>
                     <td>${escapeHtml(peligros.distrito)}</td>
-                    <td style="font-size:x-small;" width="40%">$${escapeHtml(peligros.descripcion)}</td>
+                    <td style="font-size:x-small;" width="40%">${escapeHtml(peligros.descripcion)}</td>
                     <td><a href="../media/${escapeHtml(peligros.url_pdf)}" target="_blank" class="btn btn-sm btn-block btn-info"><i class="fas fa-file-pdf"></i></a></td>
                     <td>
                     <a href="../editarPeligro/${peligros.id}" class="btn btn-sm btn-block btn-info"><i class="fas fa-pencil-alt"></i></a>

@@ -177,6 +177,13 @@ def generacionTablas(request):
     return JsonResponse(data)
 
 
+def listasinpad(request):
+    # Obtén todos los objetos Peligro y extrae solo el atributo 'sinpad'
+    sinpad_values = list(Peligro.objects.values_list("sinpad", flat=True))
+    data = {"sinpad": sinpad_values}
+    return JsonResponse(data)
+
+
 def tablas(request):
     return render(request, "tabla.html")
 
