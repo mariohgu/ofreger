@@ -26,28 +26,7 @@ class PeligroListView(ListView):
 
 
 def registro(request):
-    txtsinpad = request.POST["txtsinpad"]
-    txtprovincia = request.POST["txtprovincia"]
-    txtdistrito = request.POST["txtdistrito"]
-    txtlocalidad = request.POST["txtlocalidad"]
-    txtubigeo = request.POST["txtubigeo"]
-    txtlatitud = request.POST["txtlatitud"]
-    txtlongitud = request.POST["txtlongitud"]
-    txtdescripcion = request.POST["txtdescripcion"]
-    url_pdf = request.POST["url_pdf"]
-    carga = Peligro.objects.create(
-        sinpad=txtsinpad,
-        provincia=txtprovincia,
-        distrito=txtdistrito,
-        localidad=txtlocalidad,
-        ubigeo=txtubigeo,
-        latitud=txtlatitud,
-        longitud=txtlongitud,
-        descripcion=txtdescripcion,
-        url_pdf=url_pdf,
-    )
-
-    return redirect("/")
+    return render(request, "registro.html")
 
 
 def cargarPdf(request):

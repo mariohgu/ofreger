@@ -1,169 +1,173 @@
 {% extends 'base.html' %} {% block content %}
 <div class="container py-12">
   <div class="row">
-    <div class="row">
-      <div class="col-md-12 offset-md-12">
-        <h2>Gestión de Peligros</h2>
-        <div class="card">
-          <div class="card-body">
-            <form id="formularioPeligro" action="/validarPdf/" method="POST">
-              {% csrf_token %}
-              <input type="hidden" name="id" id="id" value="{{id}}" />
-              <div class="form-group col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                <label for="txtsinpad">Sinpad:</label>
-                <input
-                  type="number"
-                  id="txtsinpad"
-                  name="txtsinpad"
-                  class="form-control"
-                  min="1"
-                  value="{{sinpad}}"
-                  required
-                />
+    <div class="col-md-12">
+      <h2>Gestión de Peligros</h2>
+      <div class="card">
+        <div class="card-body">
+          <form id="formularioPeligro" action="/validarPdf/" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="id" id="id" value="{{id}}" />
+
+            <div class="row">
+              <!-- Columna Izquierda -->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="txtsinpad">Sinpad:</label>
+                  <input
+                    type="number"
+                    id="txtsinpad"
+                    name="txtsinpad"
+                    class="form-control"
+                    min="1"
+                    value="{{sinpad}}"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="txtprovincia">Provincia:</label>
+                  <input
+                    type="text"
+                    id="txtprovincia"
+                    name="txtprovincia"
+                    class="form-control"
+                    minlength="3"
+                    maxlength="40"
+                    placeholder="Provincia"
+                    value="{{provincia}}"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="txtdistrito">Distrito:</label>
+                  <input
+                    type="text"
+                    id="txtdistrito"
+                    name="txtdistrito"
+                    class="form-control"
+                    minlength="3"
+                    maxlength="40"
+                    placeholder="Distrito"
+                    value="{{distrito}}"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="txtlocalidad">Localidad:</label>
+                  <input
+                    type="text"
+                    id="txtlocalidad"
+                    name="txtlocalidad"
+                    class="form-control"
+                    minlength="3"
+                    maxlength="40"
+                    placeholder="Localidad"
+                    value="{{localidad}}"
+                    required
+                  />
+                </div>
               </div>
-              <br />
-              <div class="form-group col-lg-8 col-md-8 col-sm-6 col-xs-12">
-                <label for="txtprovincia">Provincia:</label>
-                <input
-                  type="text"
-                  id="txtprovincia"
-                  name="txtprovincia"
-                  class="form-control"
-                  minlength="3"
-                  maxlength="40"
-                  placeholder="Provincia"
-                  value="{{provincia}}"
-                  autofocus
-                  required
-                />
-              </div>
-              <br />
-              <div class="form-group">
-                <label for="txtdistrito">Distrito:</label>
-                <input
-                  type="text"
-                  id="txtdistrito"
-                  name="txtdistrito"
-                  class="form-control"
-                  minlength="3"
-                  maxlength="40"
-                  placeholder="Distrtito"
-                  value="{{distrito}}"
-                  autofocus
-                  required
-                />
-              </div>
-              <br />
-              <div class="form-group">
-                <label for="txtlocalidad">Localidad:</label>
-                <input
-                  type="text"
-                  id="txtlocalidad"
-                  name="txtlocalidad"
-                  class="form-control"
-                  minlength="3"
-                  maxlength="40"
-                  placeholder="Localidad"
-                  value="{{localidad}}"
-                  autofocus
-                  required
-                />
-              </div>
-              <br />
-              <div class="form-group">
-                <label for="txtubigeo">Ubigeo:</label>
-                <input
-                  type="number"
-                  id="txtubigeo"
-                  name="txtubigeo"
-                  class="form-control"
-                  min="1"
-                  value="{{ubigeo}}"
-                  required
-                />
-              </div>
-              <br />
-              <div class="form-group">
-                <label for="txtlatitud">Latitud:</label>
-                <input
-                  type="text"
-                  id="txtlatitud"
-                  name="txtlatitud"
-                  class="form-control"
-                  value="{{latitud}}"
-                  minlength="3"
-                  maxlength="40"
-                  placeholder="Latitud"
-                  autofocus
-                  required
-                />
-              </div>
-              <br />
-              <div class="form-group">
-                <label for="txtlongitud">Longitud:</label>
-                <input
-                  type="text"
-                  id="txtlongitud"
-                  name="txtlongitud"
-                  class="form-control"
-                  value="{{longitud}}"
-                  minlength="3"
-                  maxlength="40"
-                  placeholder="Longitud"
-                  autofocus
-                  required
-                />
-              </div>
-              <br />
-              <div class="form-group">
-                <label for="txtdescripcion">Descripcion:</label>
-                <textarea
-                  class="w-100"
-                  id="txtdescripcion"
-                  name="txtdescripcion"
-                  rows="4"
-                  placeholder="Descripcion"
-                  required
-                  autofocus
-                >
+
+              <!-- Columna Derecha -->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="txtubigeo">Ubigeo:</label>
+                  <input
+                    type="number"
+                    id="txtubigeo"
+                    name="txtubigeo"
+                    class="form-control"
+                    min="1"
+                    value="{{ubigeo}}"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="txtlatitud">Latitud:</label>
+                  <input
+                    type="text"
+                    id="txtlatitud"
+                    name="txtlatitud"
+                    class="form-control"
+                    value="{{latitud}}"
+                    minlength="3"
+                    maxlength="40"
+                    placeholder="Latitud"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="txtlongitud">Longitud:</label>
+                  <input
+                    type="text"
+                    id="txtlongitud"
+                    name="txtlongitud"
+                    class="form-control"
+                    value="{{longitud}}"
+                    minlength="3"
+                    maxlength="40"
+                    placeholder="Longitud"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="txtdescripcion">Descripcion:</label>
+                  <textarea
+                    class="form-control"
+                    id="txtdescripcion"
+                    name="txtdescripcion"
+                    rows="4"
+                    placeholder="Descripcion"
+                    required
+                  >
 {{descripcion}}</textarea
-                >
+                  >
+                </div>
               </div>
-              <br />
-              <div class="form-group">
-                <label for="url_pdf">PDF:</label>
-                <input
-                  type="text"
-                  id="url_pdf"
-                  name="url_pdf"
-                  class="form-control"
-                  minlength="3"
-                  maxlength="199"
-                  placeholder="PDF"
-                  value="{{url_pdf}}"
-                  autofocus
-                  required
-                  disabled
-                />
-              </div>
-              <br />
-              <div class="form-group">
-                <button type="submit" class="btn btn-success w-100 text-white">
-                  <i class="far fa-save"></i> Guardar
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-danger w-100 text-white"
-                  onclick="window.location.href='/tablas';"
-                >
-                  <i class="far fa-times-circle"></i> Cancelar
-                </button>
-              </div>
-            </form>
-          </div>
+            </div>
+
+            <div class="form-group">
+              <label for="url_pdf">PDF:</label>
+              <input
+                type="text"
+                id="url_pdf"
+                name="url_pdf"
+                class="form-control"
+                minlength="3"
+                maxlength="199"
+                placeholder="PDF"
+                value="{{url_pdf}}"
+                required
+                disabled
+              />
+            </div>
+
+            <div class="form-group">
+              <button
+                type="submit"
+                class="btn btn-success justify-content-end text-white"
+              >
+                <i class="far fa-save"></i> Guardar
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger text-white justify-content-end"
+                onclick="window.location.href='/tablas';"
+              >
+                <i class="far fa-times-circle"></i> Cancelar
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 {% endblock %}
