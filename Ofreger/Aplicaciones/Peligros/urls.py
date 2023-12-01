@@ -12,4 +12,6 @@ urlpatterns = [
     path("listasinpad/", views.listasinpad),
     path("tablas/", views.tablas),
     path("nuevo/", views.nuevo),
+    path("crearUsuario/", views.crearUsuario),
+    path("registrarUsuario/", views.registrarUsuario),
 ]

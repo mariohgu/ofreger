@@ -1,7 +1,7 @@
 from typing import Any
 import os
 from django.db.models.query import QuerySet
-from .models import Peligro
+from .models import Peligro, Usuario
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
 from .script import *
@@ -58,7 +58,6 @@ def cargarPdf(request):
                 latitud=items[4],
                 longitud=items[5],
                 descripcion=items[6],
-                # Asegúrate de que 'url_pdf' sea el nombre de tu FileField en el modelo
                 url_pdf=None,
             )
 
@@ -91,7 +90,7 @@ def cargarPdf(request):
         "latitud": latitud,
         "longitud": longitud,
         "descripcion": descripcion,
-        "url_pdf": pdf_url,  # Esta será la URL para acceder al archivo PDF
+        "url_pdf": pdf_url,
     }
 
     # Si no es una solicitud POST, simplemente muestra el formulario
@@ -161,6 +160,24 @@ def listasinpad(request):
     sinpad_values = list(Peligro.objects.values_list("sinpad", flat=True))
     data = {"sinpad": sinpad_values}
     return JsonResponse(data)
+
+
+def registrarUsuario(request):
+    Nombre = request.POST["txtNombre"]
+    email = request.POST["txtEmail"]
+    usuario = request.POST["txtUsuario"]
+    clave = request.POST["txtClave"]
+
+    nuevo_usuario = Usuario.objects.create(usuario=usuario, email=email, Nombre=Nombre)
+
+    nuevo_usuario.set_password(clave)
+    nuevo_usuario.save()
+
+    return redirect("/")
+
+
+def crearUsuario(request):
+    return render(request, "crearUsuario.html")
 
 
 def tablas(request):
