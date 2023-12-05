@@ -8,13 +8,16 @@ from .script import *
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from django.http.response import JsonResponse
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
 
 # Create your views here.
 
 
 class PeligroListView(ListView):
     model = Peligro
-    template_name = "tabla.html"
+    template_name = "cargaPdf.html"
 
     def get_queryset(self) -> QuerySet[Any]:
         return Peligro.objects.all()
@@ -119,7 +122,7 @@ def validarPdf(request):
     regis_peligro.descripcion = descripcion
     regis_peligro.save()
 
-    return redirect("/")
+    return redirect("/nuevo/")
 
 
 def editarPeligro(request, id):
@@ -146,7 +149,7 @@ def eliminarPeligro(request, id):
     if os.path.isfile(pdf_path):
         os.remove(pdf_path)
     peligro.delete()
-    return redirect("/")
+    return redirect("/tablas/")
 
 
 def generacionTablas(request):
@@ -173,7 +176,25 @@ def registrarUsuario(request):
     nuevo_usuario.set_password(clave)
     nuevo_usuario.save()
 
-    return redirect("/")
+    return redirect("/crearUsuario/")
+
+
+def logueo(request):
+    if request.method == "POST":
+        usuario = request.POST["txtUsuario"]
+        clave = request.POST["txtClave"]
+
+        username = Usuario.objects.filter(usuario=usuario, clave=clave).first()
+
+        user = authenticate(username=usuario, password=clave)
+        if username and username.check_password(clave):
+            login(request, user)
+            return redirect("/nuevo/")
+        else:
+            messages.error(request, "Invalid username or password")
+            return redirect("/login/")
+    else:
+        return redirect("/login/")
 
 
 def crearUsuario(request):
@@ -186,3 +207,7 @@ def tablas(request):
 
 def nuevo(request):
     return render(request, "cargaPdf.html")
+
+
+def login(request):
+    return render(request, "login.html")

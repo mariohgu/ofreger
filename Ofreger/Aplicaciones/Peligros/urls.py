@@ -14,4 +14,6 @@ urlpatterns = [
     path("nuevo/", views.nuevo),
     path("crearUsuario/", views.crearUsuario),
     path("registrarUsuario/", views.registrarUsuario),
+    path("login/", views.login),
+    path("logueo/", views.logueo),
 ]
